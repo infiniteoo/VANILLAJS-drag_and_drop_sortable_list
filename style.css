@@ -46,6 +46,10 @@ body {
   width: 60px;
 }
 
+.draggable-list li.over .draggable {
+  background-color: #eaeaea;
+}
+
 .draggable-list .person-name {
   margin: 0 20px 0 0;
 }
