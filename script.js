@@ -39,7 +39,7 @@ function createList() {
         </div>
         `;
 
-      listItems.push(listItems);
+      listItems.push(listItem);
       draggable_list.appendChild(listItem);
     });
 
@@ -48,6 +48,7 @@ function createList() {
 
 function dragStart() {
   /*  console.log("dragstart"); */
+  dragStartIndex = +this.closest("li").getAttribute("data-index");
 }
 function dragEnter() {
   /*  console.log("dragEnter"); */
@@ -57,11 +58,24 @@ function dragLeave() {
   /*  console.log("dragLeave"); */
   this.classList.remove("over");
 }
-function dragOver() {
+function dragOver(e) {
   /*  console.log("dragOver"); */
+  e.preventDefault();
 }
 function dragDrop() {
   /*  console.log("dragDrop"); */
+  const dragEndIndex = +this.getAttribute("data-index");
+  swapItems(dragStartIndex, dragEndIndex);
+
+  this.classList.remove("over");
+}
+
+function swapItems(fromIndex, toIndex) {
+  const itemOne = listItems[fromIndex].querySelector(".draggable");
+  const itemTwo = listItems[toIndex].querySelector(".draggable");
+
+  listItems[fromIndex].appendChild(itemTwo);
+  listItems[toIndex].appendChild(itemOne);
 }
 
 function addEventListeners() {
